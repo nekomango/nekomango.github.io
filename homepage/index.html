@@ -1,41 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>This is a title</title>
-    <style>
-      body
-      {
-        margin: 0;
-        padding: 0;
-        background-color: rgb(18, 33, 65);
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>    
+</head>
 
-<body onload="startTime()">
+<body onload="startTime(), getDate()">
 
-<h2>Clock</h2>
+  <h1 id="date" style="font-size: xx-large; color: azure; text-align: center;"></h1>
+  <h1 id="clock" style="font-size: xx-large; color: azure; text-align: center;"></h1>
 
-<h1 id="txt"></h1>
+<div class="search-bar">
+  <input class="search-text" type="text" placeholder="Search..">
+  <button class=”search-btn”> test</button> 
+</div>
 
-<script>
-function startTime() {
-  const today = new Date();
-  let h = today.getHours();
-  let m = today.getMinutes();
-  let s = today.getSeconds();
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-  setTimeout(startTime, 1000);
-}
-
-function checkTime(i) {
-  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-  return i;
-}
-</script>
 
 </body>
 </html>
+
+<script>
+  function getDate()
+  {
+    const today = new Date();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    document.getElementById('date').innerHTML = month + ' / ' + day
+    setTimeout(startTime, 1000);
+  }
+  
+  function startTime() 
+  {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =  h + ":" + m + ":" + s;
+    setTimeout(startTime, 1000);
+  }
+  
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
+
+<style>
+  body
+  {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(44, 52, 69);
+  }
+  .search-bar{
+  max-width: 960px;
+  margin:20px auto 0 auto;
+  height: auto;
+  text-align: center;
+  }
+  .search-text{
+  position: relative;
+  width: 50%;
+  }
+  .search-btn{
+  width: 36px;
+  height: 32px;
+  background-color: #3D1101;
+  color:#efe9e7;
+  outline:none;
+  border: 2px solid #3D1101;
+  cursor: cell;
+  position: absolute;
+  top: 0;
+  right: 0;
+  }
+</style>
