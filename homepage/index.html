@@ -9,12 +9,11 @@
 <body onload="startTime(), getDate(), changeBG()">
   <button class="open-popup-btn" id="open-popup-btn">Change Background</button>
   
-  <h1 id="date" style="font-size: xx-large; color: azure; text-align: center;"></h1>
-  <h1 id="clock" style="font-size: xx-large; color: azure; text-align: center;"></h1>
+  <h1 class="date" id="date" style="font-size: xx-large; color: azure; text-align: center;"></h1>
+  <h1 class="clock" id="clock" style="font-size: xx-large; color: azure; text-align: center;"></h1>
   
   <form class="search-bar" action="https://www.google.com/search" method="get">
     <input class="search-text" type="text" placeholder="Search.." name="q" required>
-    <button class=”search-btn” type="submit">🔍</button> 
   </form>  
   
   <div class="drop-zone" id="drop-zone">
@@ -110,9 +109,15 @@
     z-index: -1; /* 背景图在内容下面 */
     pointer-events: none;
   }
+  .date{
+    top: 100px;
+  }
+  .clock{
+    top: 90px;
+  }
   .search-bar{
     max-width: 960px;
-    margin: 50px auto 0 auto;
+    margin: 120px auto 0 auto;
     height: auto;
     text-align: center;
   }
