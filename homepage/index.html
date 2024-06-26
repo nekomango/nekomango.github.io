@@ -5,17 +5,20 @@
   <title>Home</title>    
 </head>
 
-<body onload="startTime(), getDate()">
-
+<body onload="startTime(), getDate(), changeBG()">
+  <button class="open-popup-btn" id="open-popup-btn">Change Background</button>
+  
   <h1 id="date" style="font-size: xx-large; color: azure; text-align: center;"></h1>
   <h1 id="clock" style="font-size: xx-large; color: azure; text-align: center;"></h1>
-
+  
   <form class="search-bar" action="https://www.google.com/search" method="get">
     <input class="search-text" type="text" placeholder="Search.." name="q" required>
     <button class=”search-btn” type="submit">🔍</button> 
-  </form>
-
-
+  </form>  
+  
+  <div class="drop-zone" id="drop-zone">
+    Drag and drop an image file here to change the background
+  </div>
 </body>
 </html>
 
@@ -41,29 +44,110 @@
     setTimeout(startTime, 1000);
   }
   
-  function checkTime(i) {
+  function checkTime(i) 
+  {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
   }
-  </script>
+  
+  function changeBG()
+  {
+    const dropZone = document.getElementById('drop-zone');
+    
+    dropZone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropZone.classList.remove('dragover');
+      
+      const file = event.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.body.style.backgroundImage = `url('${e.target.result}')`;
+          document.body.style.background
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please drop an image file.');
+      }
+    });
+  }
+</script>
 
 <style>
-  body
-  {
+  body{
     margin: 0;
     padding: 0;
     background-color: rgb(44, 52, 69);
   }
+  body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明背景颜色 */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* 设置透明度 */
+    z-index: -1; /* 背景图在内容下面 */
+    pointer-events: none;
+  }
   .search-bar{
-  max-width: 960px;
-  margin: 50px auto 0 auto;
-  height: auto;
-  text-align: center;
+    max-width: 960px;
+    margin: 50px auto 0 auto;
+    height: auto;
+    text-align: center;
   }
   .search-text{
-  position: relative;
-  width: 60%;
-  border-radius: 15px;
+    position: relative;
+    width: 60%;
+    height: 36px;
+    border-radius: 25px;
   }
-
+  .open-popup-btn{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 25px;
+    opacity: 100%;
+  }
+  .search-btn{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 25px;
+    opacity: 100%;
+  }
+  .drop-zone {
+    width: 80%;
+    height: 80%;
+    border: 4px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ccc;
+    font-size: 24px;
+  }
+  .drop-zone.dragover {
+    border-color: #333;
+    color: #333;
+  }
 </style>
