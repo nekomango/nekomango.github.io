@@ -91,6 +91,13 @@
             color: #ccc;
             margin-top: 20px;
         }
+        #resetBG-btn{
+            outline: none;
+            border: none;
+            background-color: var(--main-bg2);
+            cursor: pointer;
+            margin-top: 10px;
+        }
         .close {
             color: #aaa;
             float: right;
@@ -145,6 +152,7 @@
             <span class="close">&times;</span>
             <p>將圖片拖放到此處以更換背景</p>
             <div id="drop-area">拖放區域</div>
+            <button id="resetBG-btn" onclick="resetBG()"><i class="fa-solid fa-arrows-rotate"></i>重置背景</button>
         </div>
     </div>
     <br>
@@ -268,5 +276,9 @@ function toggleText()
     yt.style.visibility = "collapse";
     yt.style.display = "none";
   }
+}
+
+function resetBG(){
+    document.body.style.backgroundImage = 'none';
 }
 </script>
