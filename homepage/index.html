@@ -119,11 +119,11 @@
     </div> 
 
     <nav id="tool-bar">
-        <button>常用</button>
-        <button>休閒</button>
-        <button>遊戲</button>
-        <button>學習</button>
-        <button>其他</button>
+        <button onclick="updateShortcuts('common')">常用</button>
+        <button onclick="updateShortcuts('leisure')">休閒</button>
+        <button onclick="updateShortcuts('games')">遊戲</button>
+        <button onclick="updateShortcuts('learning')">學習</button>
+        <button onclick="updateShortcuts('other')">其他</button>
         <div class="animation"></div>
     </nav>
 
@@ -139,6 +139,7 @@
 <!--更換背景-->
 <script src="./script/changeBG.js"></script>
 
+<script src="./script/shortcut.js"></script>
 
 <!--switch search bar-->
 <script>
@@ -160,22 +161,4 @@ function toggleText()
     yt.style.display = "none";
   }
 }
-</script>
-
-<script>
-    const shortcuts = [
-        { url: 'https://www.google.com', name: 'Google' },
-        { url: 'https://www.youtube.com', name: 'YouTube' },
-        { url: 'https://www.facebook.com', name: 'Facebook' }
-        // 添加更多捷徑
-    ];
-
-    const container = document.getElementById('container');
-    shortcuts.forEach(shortcut => {
-        const a = document.createElement('a');
-        a.href = shortcut.url;
-        a.className = 'shortcut';
-        a.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${new URL(shortcut.url).hostname}" alt="${shortcut.name}"><span>${shortcut.name}</span>`;
-        container.appendChild(a);
-    });
 </script>
