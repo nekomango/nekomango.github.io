@@ -1,0 +1,58 @@
+#sidebar {
+    height: 100%;
+    width: 0;
+    max-width: 200px;
+    position: fixed;
+    top: 0;
+    left: -10px;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* 添加陰影效果 */
+    opacity: 0.9; /* 背景透明度 */
+    backdrop-filter: blur(10px); /* 模糊背景 */
+}
+#sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1.3em;
+    color: #818181;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    transition: 0.3s;
+}
+#sidebar a:hover {
+    color: #f1f1f1;
+    font-size: 1.5em;
+}
+#sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#openSidebarBtn {
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    color: rgb(255, 240, 240);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
