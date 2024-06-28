@@ -1,0 +1,64 @@
+#tool-bar{
+    position: relative;
+    width: 750px;
+    height: 40px;
+    margin: 45px auto 0 ;
+    background-color: #fff;
+    border-radius: 30px;
+    font-size: 0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    #tool-bar button{
+        position: relative;
+        font-size: 25px;
+        text-decoration: none;
+        text-align: center ;
+        border: none;
+        background-color: transparent; /* BG-color */
+        border-radius: 30px;
+        display: inline-block;
+        z-index: 1;
+    }
+    #tool-bar .animation{
+        position: absolute;
+        height: 100%;
+        top: 0%;
+        z-index: 0;
+        border-radius: 30px;
+        background-color: rgb(83, 112, 177);
+    }
+    #tool-bar button:nth-child(1){
+        width: 150px;
+    }
+    #tool-bar button:nth-child(2){
+        width: 150px;
+    }
+    #tool-bar button:nth-child(3){
+        width: 150px;
+    }
+    #tool-bar button:nth-child(4){
+        width: 150px;
+    }
+    #tool-bar button:nth-child(5){
+        width: 150px;
+    }
+    #tool-bar button:nth-child(1):hover~.animation{
+        width: 150px;
+        left: 0px;
+    }
+    #tool-bar button:nth-child(2):hover~.animation{
+        width: 150px;
+        left: 150px;
+    }
+    #tool-bar button:nth-child(3):hover~.animation{
+        width: 150px;
+        left: 300px;
+    }
+    #tool-bar button:nth-child(4):hover~.animation{
+        width: 150px;
+        left: 450px;
+    }
+    #tool-bar button:nth-child(5):hover~.animation{
+        width: 150px;
+        left: 600px;
+    }

@@ -7,6 +7,7 @@
     <link rel="icon" type="image" href="./favicon.ico">
     <link rel="stylesheet" href="./style/sidebar.css">
     <link rel="stylesheet" href="./style/changeBG.css">
+    <link rel="stylesheet" href="./style/toolbar.css">
     <title>Home</title>   
     <style>
         body, html {
@@ -20,74 +21,66 @@
             align-items: center;
         }
         #toggleButton {
-        outline: none;
-        border: none;
-        border-radius: 25px;
-        background-color: var(--main-bg2);
-        color: rgb(255, 255, 255);
-        font-size: 18px;
+            outline: none;
+            border: none;
+            border-radius: 25px;
+            background-color: var(--main-bg2);
+            color: rgb(255, 255, 255);
+            font-size: 18px;
         } 
         .search-bar{
-        display: flex;
-        max-width: 960px;
-        margin: 70px auto 0 auto;
-        height: auto;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: nowrap;
+            display: flex;
+            max-width: 960px;
+            margin: 70px auto 0 auto;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
         }
         .hidden{
-        display: none;
+            display: none;
         }
         .search-text{
-        position: relative;
-        width: 560px;
-        height: 45px;
-        border-radius: 30px;
-        }
-        #tool-bar{
-        position: relative;
-        width: 750px;
-        height: 40px;
-        margin: 70px auto 0 ;
-        background-color: #fff;
-        border-radius: 30px;
-        font-size: 0;
-        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
-        }
-        #tool-bar a{
             position: relative;
-            font-size: 25px;
-            text-decoration: none;
-            text-align: center ;
-            color: rgb(63, 63, 63);
-            display: inline-block;
-            z-index: 1;
-        }
-        #tool-bar a:nth-child(1){
-            width: 150px;
-        }
-        #tool-bar a:nth-child(2){
-            width: 150px;
-        }
-        #tool-bar a:nth-child(3){
-            width: 150px;
-        }
-        #tool-bar a:nth-child(4){
-            width: 150px;
-        }
-        #tool-bar a:nth-child(5){
-            width: 150px;
-        }
-
-        #tool-bar .animation{
-            position: absolute;
-            height: 100%;
-            width: 150px;
-            top: 0%;
-            z-index: 0;
+            width: 560px;
+            height: 45px;
             border-radius: 30px;
-            background-color: rgb(83, 112, 177);
+        }
+        
+        #container {
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 70px auto 0 auto;
+            }
+        .shortcut {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .shortcut img {
+            width: 32px;
+            height: 32px;
+        }
+        .shortcut span {
+        margin-top: 10px;
+        font-size: 12px;
         }
     </style>
 </head>
@@ -98,6 +91,7 @@
         <a id="openModalBtn">更換背景</a>
         <!-- 可以添加更多链接 -->
     </div>
+    <div id="overlay" class="overlay"></div>
 
     <span id="openSidebarBtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></span>
 
@@ -125,15 +119,15 @@
     </div> 
 
     <nav id="tool-bar">
-        <a href="#">常用</a>
-        <a href="#">休閒</a>
-        <a href="#">遊戲</a>
-        <a href="#">學習</a>
-        <a href="#">其他</a>
+        <button>常用</button>
+        <button>休閒</button>
+        <button>遊戲</button>
+        <button>學習</button>
+        <button>其他</button>
         <div class="animation"></div>
     </nav>
 
-
+    <div id="container"></div>
 
 </body>
 </html>
@@ -144,6 +138,7 @@
 <script src="./script/clock.js"></script>
 <!--更換背景-->
 <script src="./script/changeBG.js"></script>
+
 
 <!--switch search bar-->
 <script>
@@ -165,4 +160,22 @@ function toggleText()
     yt.style.display = "none";
   }
 }
+</script>
+
+<script>
+    const shortcuts = [
+        { url: 'https://www.google.com', name: 'Google' },
+        { url: 'https://www.youtube.com', name: 'YouTube' },
+        { url: 'https://www.facebook.com', name: 'Facebook' }
+        // 添加更多捷徑
+    ];
+
+    const container = document.getElementById('container');
+    shortcuts.forEach(shortcut => {
+        const a = document.createElement('a');
+        a.href = shortcut.url;
+        a.className = 'shortcut';
+        a.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${new URL(shortcut.url).hostname}" alt="${shortcut.name}"><span>${shortcut.name}</span>`;
+        container.appendChild(a);
+    });
 </script>
