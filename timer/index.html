@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計時器</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #timer {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">00:00:00</div>
+    <button id="start">開始</button>
+    <button id="stop">停止</button>
+    <button id="reset">重置</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+// script.js
+let timer;
+let isRunning = false;
+let startTime;
+let elapsedTime = 0;
+
+const timerElement = document.getElementById('timer');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+startButton.addEventListener('click', startTimer);
+stopButton.addEventListener('click', stopTimer);
+resetButton.addEventListener('click', resetTimer);
+
+function startTimer() {
+    if (!isRunning) {
+        isRunning = true;
+        startTime = Date.now() - elapsedTime;
+        timer = setInterval(updateTimer, 1000);
+    }
+}
+
+function stopTimer() {
+    if (isRunning) {
+        isRunning = false;
+        elapsedTime = Date.now() - startTime;
+        clearInterval(timer);
+    }
+}
+
+function resetTimer() {
+    isRunning = false;
+    clearInterval(timer);
+    elapsedTime = 0;
+    timerElement.textContent = '00:00:00';
+}
+
+function updateTimer() {
+    elapsedTime = Date.now() - startTime;
+    const totalSeconds = Math.floor(elapsedTime / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
+function pad(number) {
+    return number.toString().padStart(2, '0');
+}
+</script>
