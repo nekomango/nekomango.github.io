@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>🎱8 ball</title>
+
+    <style>
+        #result{
+            position: relative;
+            font-size: 45px;
+            text-align: center;
+        }
+        .text{
+            position: relative;
+            width: 560px;
+            height: 70px;
+            border-radius: 50px;
+        }
+        .input-bar{
+            display: flex;
+            max-width: 960px;
+            margin: 70px auto 0 auto;
+            justify-content: center;
+        }
+        button
+        {
+            margin: 15% 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 200px;
+            height: 60px;
+            border-radius: 50px;
+            text-align: center;
+            line-height: 40px;
+            color: whitesmoke;
+            font-size: 32px;
+            background: darkslategrey
+        }
+        button:hover{
+            width: 210px;
+            height: 65px;
+            font-size: 35px;
+            background: rgb(56, 93, 93)
+        }
+        
+    </style>
+  </head>
+  <body>
+    <div id="result">🎱8 ball</div>
+    <div class="input-bar">
+    <input class="text" type="text" placeholder=" 問我任何事..." name="q" required>
+    </div>
+
+    <button id="start">開始</button>
+  </body>
+</html>
+
+<script>
+    var text = ["是", "否", '無所謂'];
+    const result = document.getElementById("result");
+    const button = document.getElementById("start");
+
+    button.addEventListener("click", roll);
+    function roll()
+    {
+        result.textContent = text[Math.floor(Math.random() * text.length)]
+    }
+</script>
