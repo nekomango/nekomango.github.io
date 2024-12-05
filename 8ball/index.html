@@ -60,7 +60,7 @@
   <body>
     <div id="result">🎱8 ball</div>
     <div class="input-bar">
-        <input class="text" type="text" placeholder=" 問我任何事..." name="q" required>
+        <input class="text" type="text" placeholder=" 問我任何事..." id="question" required>
     </div>
 
     <div style="text-align: center;">
@@ -73,10 +73,35 @@
     var text = ["是", "否", '無所謂'];
     const result = document.getElementById("result");
     const button = document.getElementById("start");
+    const input = document.getElementById("question");
+    
 
     button.addEventListener("click", roll);
+
     function roll()
     {
-        result.textContent = text[Math.floor(Math.random() * text.length)]
+        const content = input.value.trim(); // 取得並去掉空格
+        if(content.includes(",") || content.includes("/"))
+        {
+            choice(content)
+        }
+        else
+        {
+            result.textContent = text[Math.floor(Math.random() * text.length)]
+        }  
+    }
+
+    function choice(input)
+    {
+        // 根據逗號或斜線分割輸入的字串
+        const options = input.split(/[,\/]/).map(option => option.trim()).filter(option => option);
+            
+        // 隨機選擇一個選項
+        if (options.length > 0) {
+            result.textContent = options[Math.floor(Math.random() * options.length)];
+        } 
+        else {
+            result.textContent = "請輸入有效的選項！";
+        }
     }
 </script>
