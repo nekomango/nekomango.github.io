@@ -22,25 +22,37 @@
             margin: 70px auto 0 auto;
             justify-content: center;
         }
-        button
-        {
-            margin: 15% 50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            width: 200px;
-            height: 60px;
-            border-radius: 50px;
-            text-align: center;
-            line-height: 40px;
-            color: whitesmoke;
-            font-size: 32px;
-            background: darkslategrey
+
+        #start {
+        margin: 50px auto 0 auto;
+        background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+        border-radius: 18px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        flex-shrink: 0;
+        font-size: 25px;
+        height: 4rem;
+        width: 150px;
+        padding: 0 1.6rem;
+        text-align: center;
+        text-shadow: rgba(0, 0, 0, 0.25) 0 3px 5px;
+        transition: all .5s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
         }
-        button:hover{
-            width: 210px;
-            height: 65px;
-            font-size: 35px;
-            background: rgb(56, 93, 93)
+
+        #start:hover {
+        box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+        transition-duration: .1s;
+        }
+
+        @media (min-width: 768px) {
+        button-36 {
+            padding: 0 2.6rem;
+        }
         }
         
     </style>
@@ -48,10 +60,12 @@
   <body>
     <div id="result">🎱8 ball</div>
     <div class="input-bar">
-    <input class="text" type="text" placeholder=" 問我任何事..." name="q" required>
+        <input class="text" type="text" placeholder=" 問我任何事..." name="q" required>
     </div>
 
-    <button id="start">開始</button>
+    <div style="text-align: center;">
+        <button id="start" >開抽</button>
+    </div>
   </body>
 </html>
 
