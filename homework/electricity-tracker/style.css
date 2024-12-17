@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #2d3275;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h2 {
+    color: #333;
+}
+
+.date {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.stats, .devices{
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.stats div {
+    text-align: center;
+}
+
+.stats div p {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.stats div h3, .devices div h3{
+    color: #2d3275;
+    margin: 0;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.warning  {
+    display: flex;
+    background-color: rgb(174, 16, 16);
+    
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+.warning div p {
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+    
+}
+
+.warning div h3 {
+    font-size: 15px;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+}
+
+.devices {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.devices div {
+    text-align: left;
+    font-size: 18px;
+}
+
+.devices div p {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.chart-container {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+#electricityChart, #deviceChart {
+    width: 100%;
+    height: 300px;
+}
+
+/* 伸縮效果樣式 */
+.collapsible {
+    background-color: #f4f4f4;
+    color: #333; /*word color*/
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+.active, .collapsible:hover {
+    background-color: #ddd;
+}
+
+.collapsible-content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    margin-bottom: 20px;
+}

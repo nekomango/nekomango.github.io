@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物聯網用電追蹤系統</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+<header>
+    <h1>物聯網用電追蹤系統</h1>
+</header>
+
+<main>
+
+    <div class="date">
+        <p>2025 / 5 / 14</p>
+    </div>
+    <section class="stats">
+        <div>
+            <p>本月耗電量</p>
+            <h3 id="month-consumption">0 kWh</h3>
+        </div>
+        <div>
+            <p>今日耗電量</p>
+            <h3 id="day-consumption">0 kW</h3>
+        </div>
+        <div>
+            <p>預估本月電費</p>
+            <h3 id="bill">0 NTD</h3>
+        </div>
+    </section>
+
+    <section class="warning">
+        <div>
+            <p>⚠ 空調 - 長時間運行</p>
+            <h3>空調已持續運行8小時以上，建議關閉或提高溫度</h3>
+        </div>
+    </section>
+    <section class="warning">
+        <div>
+            <p>⚠ 冰箱 - 異常高耗電</p>
+            <h3>冰箱的用電量明顯高於平常，建議檢查是否關閉不嚴或是否有問題</h3>
+        </div>
+    </section>
+
+    <button class="collapsible">今日用電趨勢</button>
+    <div class="collapsible-content">
+        <section class="chart-container">
+            <canvas id="electricityChart"></canvas>
+        </section>
+    </div>
+
+    <button class="collapsible">各電器用電量</button>
+    <div class="collapsible-content">
+        <section class="devices">
+            <div>
+                <p>電腦 🥇</p>
+                <h3 id="device6-usage">0 kW</h3>
+            </div>
+            <div>
+                <p>空調 🥈</p>
+                <h3 id="device1-usage">0 kW</h3>
+            </div>
+            <div>
+                <p>冰箱 🥉</p>
+                <h3 id="device2-usage">0 kW</h3>
+            </div>
+            <div>
+                <p>洗衣機</p>
+                <h3 id="device3-usage">0 kW</h3>
+            </div>
+            <div>
+                <p>熱水器</p>
+                <h3 id="device5-usage">0 kW</h3>
+            </div>
+            <div>
+                <p>燈具</p>
+                <h3 id="device4-usage">0 kW</h3>
+            </div>         
+        </section>
+    </div>
+
+    <button class="collapsible">各電器用電比例</button>
+    <div class="collapsible-content">
+        <section class="chart-container">
+            <canvas id="deviceChart"></canvas>
+        </section>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script>
+    // 用電資料
+    const electricityData = {
+        month_consumption: 124.3,  // 單位：kWh
+        day_consumption: 7.08,  // 單位：kWh
+        bill: 620.15,  // 單位：NTD
+        hourlyData: [0.3, 0.25, 0.15, 0.48, 0.6, 0.75, 0.8, 1.05, 0.9, 0.8, 1],  // 每小時用電量
+        devices: {
+            airConditioner: 1.4,  // 空調
+            fridge: 1.38,  // 冰箱
+            washingMachine: 0.7,  // 洗衣機
+            lights: 0.3,  // 燈具
+            heater: 0.5, // 熱水器
+            computer: 2.7 // 電腦
+        }
+    };
+
+    // 更新統計數據
+    document.getElementById('month-consumption').innerText = electricityData.month_consumption + " kWh";
+    document.getElementById('day-consumption').innerText = electricityData.day_consumption + " kWh";
+    document.getElementById('bill').innerText = electricityData.bill + " NTD";
+
+    // 更新電器用電量
+    document.getElementById('device1-usage').innerText = electricityData.devices.airConditioner + " kW";
+    document.getElementById('device2-usage').innerText = electricityData.devices.fridge + " kW";
+    document.getElementById('device3-usage').innerText = electricityData.devices.washingMachine + " kW";
+    document.getElementById('device4-usage').innerText = electricityData.devices.lights + " kW";
+    document.getElementById('device5-usage').innerText = electricityData.devices.heater + " kW";
+    document.getElementById('device6-usage').innerText = electricityData.devices.computer + " kW";
+
+    // 繪製用電趨勢圖表
+    const ctx = document.getElementById('electricityChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+            datasets: [{
+                label: '每小時用電量 (kWh)',
+                data: electricityData.hourlyData,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // 繪製電器用電比例圖表
+    const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+    const deviceChart = new Chart(deviceCtx, {
+        type: 'pie',
+        data: {
+            labels: ['空調', '冰箱', '洗衣機', '燈具','熱水器','電腦'],
+            datasets: [{
+                label: '用電量 (kW)',
+                data: [
+                    electricityData.devices.airConditioner,
+                    electricityData.devices.fridge,
+                    electricityData.devices.washingMachine,
+                    electricityData.devices.lights,
+                    electricityData.devices.heater,
+                    electricityData.devices.computer
+                ],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#2e8f4c', '#4103fc'],
+                hoverOffset: 6
+            }]
+        },
+        options: {
+        plugins: {
+            datalabels: {
+                color: '#fff',  // 標籤文字顏色
+                formatter: (value, context) => {
+                    let total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                    let percentage = (value / total * 100).toFixed(1);  // 計算百分比並保留一位小數
+                    let label = context.chart.data.labels[context.dataIndex];
+                    return label + ":\n" + percentage + '%';  // 顯示百分比
+                },
+                font: {
+                    weight: 'bold',
+                    size: 14
+                }
+            }
+        }
+    },
+    plugins: [ChartDataLabels]  // 啟用 ChartDataLabels 插件
+    });
+
+    // 伸縮效果腳本
+    const collapsibles = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < collapsibles.length; i++) {
+        collapsibles[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
